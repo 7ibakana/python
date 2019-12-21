@@ -28,19 +28,13 @@ def get_seasoning(taco):
     print(f"Seasoning: {taco['seasoning']['name']}")
     return taco['seasoning']
 def full_recipe(taco):
-    get_full_recipe(taco)
-def get_full_recipe(taco):
-    '''Writes full recipe in file
+    '''Writes full recipe
        and puts it in a word document'''
     shell = taco['shell']['name']
     main = taco['base_layer']['name']
     mixin = taco['mixin']['name']
     c = taco['condiment']['name']
     s = taco['seasoning']['name']
-    recipe = docx.Document()
-    recipe.add_heading('Random Taco Cookbook', 0)
-    recipe.add_picture('Random_Taco_Cookbook.jpg', width=Inches(6.25))
-    recipe.add_paragraph('Miguel Andrade')
     title = f'# {main} & {mixin} with {c} and {s} in/in a {shell}'
     recipe.add_paragraph(title)
     recipe.add_paragraph(f"\n\n## {taco['shell']['recipe']}")
@@ -49,6 +43,13 @@ def get_full_recipe(taco):
     recipe.add_paragraph(f"\n\n## {taco['condiment']['recipe']}")
     recipe.add_paragraph(f"\n\n## {taco['seasoning']['recipe']}")
     recipe.save('Cookbook.docx')
+'''The first page heading, added pic, and author name, and url'''
+recipe = docx.Document()
+recipe.add_heading('Random Taco Cookbook', 0)
+recipe.add_picture('Random_Taco_Cookbook.jpg', width=Inches(6.25))
+recipe.add_paragraph('Miguel Andrade')
+recipe.add_paragraph('https://taco-1150.herokuapp.com/random/?full_taco=true')
+'''Coordinates the ingredients with the recipe for each recipe and calls it from their definitions'''
 if __name__ == '__main__':
     taco = get_taco()
     shell = get_shell(taco)
